@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #7abecc !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'reg_app:home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'reg_app:course_registration' %}">Course Regestration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'reg_app:dashboard' st_ins.st_id %}">DashBoard</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<section>
+
+
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Student
+                        Name:</label>
+                    <div class="col-sm-6">
+                        <h3>{{ st_ins.stu_name }} </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Student
+                        Id:</label>
+                    <div class="col-sm-6">
+                        <h3>{{ st_ins.st_id }}</h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Student
+                        Type:</label>
+                    <div class="col-sm-6">
+                        <h3>{{ st_ins.stu_type }}</h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm"
+                           class="col-sm-2 col-form-label col-form-label-sm">Department:</label>
+                    <div class="col-sm-6">
+                        <h3>{{ st_ins.department }}</h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Semester
+                        Enrolled:</label>
+                    <div class="col-sm-6">
+                        <h3>{{ st_ins.semester }}</h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Semester
+                        Name: </label>
+                    <div class="col-sm-6">
+                        <h3>{{ st_ins.semester_name }}</h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Total Taken
+                        Credit:</label>
+                    <div class="col-sm-6">
+                        <h3>{{ st_ins.credit }}</h3>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2>Course Information</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Sl No</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Course Code</th>
+                    <th scope="col">Credit Hours</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Remarks</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for enroll in enroll_ins %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ enroll.course_name }}</td>
+                        <td>{{ enroll.course_code }}</td>
+                        <td class="text-center">{{ enroll.credit_hour }}</td>
+
+                        <td>{{ enroll.status }}</td>
+                        {% if enroll.remarks is True %}
+                            <td class="text-success">Success</td>
+                        {% else %}
+                            <td class="text-danger">Pending</td>
+
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<br><br><br>
+</body>
+
+</html>
